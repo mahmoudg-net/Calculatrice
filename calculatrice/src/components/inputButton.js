@@ -4,15 +4,16 @@ import { connect } from "react-redux";
 import { Input } from "../redux/actions";
 
 function Presentation(props) {
-  const { char, handleClick } = { ...props };
+  const { id, char, handleClick } = { ...props };
   return (
-    <button id={char} onClick={() => handleClick(char)}>
+    <button id={id} onClick={() => handleClick(char)}>
       {char}
     </button>
   );
 }
 
 Presentation.propTypes = {
+  id: PropTypes.string.isRequired,
   char: PropTypes.string.isRequired,
   handleClick: PropTypes.func.isRequired,
 };

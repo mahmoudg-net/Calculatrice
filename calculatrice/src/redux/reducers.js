@@ -60,7 +60,7 @@ const applyOperator = (state, operator) => {
   if (operators.includes(operator)) {
     if (lastOperator !== "") {
       return {
-        left: AllOperators[lastOperator](left, right).toString(),
+        left: AllOperators[lastOperator].func(left, right).toString(),
         lastOperator: operator,
         right: "",
         appendToLeft: false,
@@ -77,7 +77,7 @@ const applyOperator = (state, operator) => {
   if (operator === "=") {
     if (lastOperator !== "") {
       return {
-        left: AllOperators[lastOperator](left, right).toString(),
+        left: AllOperators[lastOperator].func(left, right).toString(),
         lastOperator: "",
         right: "",
         appendToLeft: true,

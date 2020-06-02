@@ -4,12 +4,17 @@ import { connect } from "react-redux";
 import { Operator } from "../redux/actions";
 
 function Presentation(props) {
-  const { operator, handleClick } = { ...props };
+  const { id, operator, handleClick } = { ...props };
 
-  return <button onClick={() => handleClick(operator)}>{operator}</button>;
+  return (
+    <button id={id} onClick={() => handleClick(operator)}>
+      {operator}
+    </button>
+  );
 }
 
 Presentation.propTypes = {
+  id: PropTypes.string.isRequired,
   operator: PropTypes.string.isRequired,
   handleClick: PropTypes.func.isRequired,
 };

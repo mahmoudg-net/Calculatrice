@@ -8,23 +8,37 @@ import "./App.css";
 import CalculationButton from "./components/calculatorButton";
 
 function App() {
-  const numbers = [];
-  for (let i = 0; i < 10; i++) {
-    numbers.push(i.toString());
-  }
-  numbers.push(".");
+  const numbers = [
+    { "0": "zero" },
+    { "1": "one" },
+    { "2": "two" },
+    { "3": "three" },
+    { "4": "four" },
+    { "5": "five" },
+    { "6": "six" },
+    { "7": "seven" },
+    { "8": "eight" },
+    { "9": "nine" },
+    { ".": "decimal" },
+  ];
   const operators = Object.keys(AllOperators);
-  operators.push("=");
   return (
     <Provider store={store}>
       <div className="App">
         <Display />
         {numbers.map((n) => {
-          return <InputButton key={n} char={n} />;
+          const k = Object.keys(n)[0];
+          return <InputButton key={n[k]} char={k} id={n[k]} />;
         })}
         <div style={{ display: "block" }}>
           {operators.map((o) => {
-            return <CalculationButton key={o} operator={o} />;
+            return (
+              <CalculationButton
+                key={AllOperators[o].id}
+                operator={o}
+                id={AllOperators[o].id}
+              />
+            );
           })}
         </div>
       </div>

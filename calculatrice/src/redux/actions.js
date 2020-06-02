@@ -19,8 +19,9 @@ export const Operator = (ope) => {
 };
 
 export const AllOperators = {
-  "+": (a, b) => Number(a) + Number(b),
-  "-": (a, b) => Number(a) - Number(b),
-  "*": (a, b) => Number(a) * Number(b),
-  "/": (a, b) => Number(a) / Number(b),
+  "+": { func: (a, b) => Number(a) + Number(b), id: "add" },
+  "-": { func: (a, b) => Number(a) - Number(b), id: "subtract" },
+  "*": { func: (a, b) => Number(a) * Number(b), id: "multiply" },
+  "/": { func: (a, b) => Number(a) / Number(b), id: "divide" },
+  "=": { func: (a) => a, id: "equals" },
 };

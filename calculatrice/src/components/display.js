@@ -7,6 +7,9 @@ function Presentation(props) {
   const { left, right, lastOperator, appendToLeft } = { ...props };
   return (
     <div id="displayContainer">
+      <div id="display">
+        {appendToLeft || right === "" || right === "0" ? left : right}
+      </div>
       <div>left : {left}</div>
       <div>lastOperator: {lastOperator}</div>
       <div>appendToLeft: {appendToLeft.toString()}</div>
