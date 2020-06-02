@@ -1,11 +1,23 @@
 import React from "react";
-import { Provider } from "react-redux";
+import { Provider, connect } from "react-redux";
 import store from "./redux/store";
 import Display from "./components/display";
 import InputButton from "./components/inputButton";
-import { AllOperators } from "./redux/actions";
+import { AllOperators, Clear } from "./redux/actions";
 import "./App.css";
 import CalculationButton from "./components/calculatorButton";
+
+const ClearButton = connect(null, (dispatch) => {
+  return {
+    handleClick: () => dispatch(Clear()),
+  };
+})((props) => {
+  return (
+    <button id="clear" onClick={props.handleClick}>
+      Clear
+    </button>
+  );
+});
 
 function App() {
   const numbers = [
@@ -41,6 +53,7 @@ function App() {
             );
           })}
         </div>
+        <ClearButton />
       </div>
     </Provider>
   );

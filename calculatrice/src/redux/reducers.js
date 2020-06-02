@@ -1,4 +1,4 @@
-import { INPUT, OPERATOR, AllOperators } from "./actions";
+import { INPUT, OPERATOR, CLEAR, AllOperators } from "./actions";
 
 export const initialState = {
   left: "",
@@ -26,6 +26,8 @@ const reducer = (state = initialState, action) => {
       console.log(ret);
       console.log({ ...state, ...ret });
       return { ...state, ...ret };
+    case CLEAR:
+      return Object.assign(initialState, { left: "0" });
     default:
       return state;
   }

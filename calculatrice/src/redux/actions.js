@@ -1,5 +1,6 @@
 export const INPUT = "INPUT";
 export const OPERATOR = "OPERATOR";
+export const CLEAR = "CLEAR";
 
 export const Input = (newChar) => {
   return {
@@ -15,6 +16,12 @@ export const Operator = (ope) => {
   return {
     type: OPERATOR,
     payload: ope,
+  };
+};
+
+export const Clear = () => {
+  return {
+    type: CLEAR,
   };
 };
 
