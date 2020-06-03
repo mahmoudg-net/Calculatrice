@@ -3,11 +3,10 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 function Presentation(props) {
-  console.log(props);
   const { left, right, lastOperator, operator, appendToLeft } = { ...props };
   return (
     <div id="displayContainer">
-      <div id="display">{appendToLeft ? left : right}</div>
+      <div id="display">{appendToLeft || right === "" ? left : right}</div>
       <div>left : {left}</div>
       <div>operator: {operator}</div>
       <div>lastOperator: {lastOperator}</div>

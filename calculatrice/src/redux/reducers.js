@@ -24,12 +24,18 @@ const reducer = (state = initialState, action) => {
       );
       return ass;
     case APPEND_OPERATOR:
-      const returned = appendOperator(state.left, action.payload);
-      return { ...state, ...returned };
+      const returned = appendOperator(
+        state.left,
+        action.payload,
+        state.operator,
+        state.right
+      );
+      return { ...state, ...{ lastOperator: state.operator }, ...returned };
     case COMPUTE:
       return Object.assign(
         {},
         state,
+        { operator: action.payload },
         makeComputation(state.left, state.right, state.operator)
       );
     case CLEAR:
@@ -63,19 +69,37 @@ const appendInput = (left, right, appendToLeft, newChar) => {
   }
 };
 
-const appendOperator = (left, operator) => {
+const appendOperator = (left, actionOperator, stateOperator, right) => {
+  if (actionOperator === "-" && stateOperator !== "") {
+    return {
+      left: left === "" ? "0" : left,
+      operator: stateOperator,
+      appendToLeft: false,
+      right: "-",
+    };
+  }
+  if (actionOperator !== "" && right === "-") {
+    return {
+      left: left === "" ? "0" : left,
+      operator: actionOperator,
+      right: "",
+      appendToLeft: false,
+      lastOperator: "-",
+    };
+  }
   return {
     left: left === "" ? "0" : left,
-    operator,
+    operator: actionOperator,
     appendToLeft: false,
   };
 };
 
-const makeComputation = (left, right, operator) => {
+const makeComputation = (left, right, stateOperator) => {
   return {
-    left: AllOperators[operator].func(left, right),
+    left: AllOperators[stateOperator].func(left, right).toString(),
     right: "",
     appendToLeft: false,
+    lastOperator: stateOperator,
   };
 };
 

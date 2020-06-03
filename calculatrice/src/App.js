@@ -1,26 +1,10 @@
 import React from "react";
-import { connect } from "react-redux";
 import Display from "./components/display";
 import InputButton from "./components/inputButton";
-import { AllOperators, Clear, Compute } from "./redux/actions";
+import { AllOperators } from "./redux/actions";
 import "./App.css";
 import CalculationButton from "./components/calculationButton";
-
-const CLEAR_BUTTON = "Clear";
-const RESULT_BUTTON = "=";
-
-const CustomButtom = connect(null, (dispatch) => {
-  return {
-    handleClick: (buttonType) =>
-      buttonType === CLEAR_BUTTON ? dispatch(Clear()) : dispatch(Compute()),
-  };
-})((props) => {
-  return (
-    <button id="custom" onClick={() => props.handleClick(props.buttonType)}>
-      {props.buttonType}
-    </button>
-  );
-});
+import { ActionButtons } from "./components/customButton";
 
 function App() {
   const numbers = [
@@ -59,8 +43,7 @@ function App() {
         })}
       </div>
       <div style={{ display: "block" }}>
-        <CustomButtom buttonType={RESULT_BUTTON} />
-        <CustomButtom buttonType={CLEAR_BUTTON} />
+        <ActionButtons />
       </div>
     </div>
   );

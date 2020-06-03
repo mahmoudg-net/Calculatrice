@@ -29,7 +29,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     handleClick: (operator, right) => {
-      if (right !== "") {
+      if (right !== "" && right !== "-") {
         dispatch(Compute(operator));
       } else {
         dispatch(AppendOperator(operator));
