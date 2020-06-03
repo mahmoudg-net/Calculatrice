@@ -4,13 +4,12 @@ import { connect } from "react-redux";
 
 function Presentation(props) {
   console.log(props);
-  const { left, right, lastOperator, appendToLeft } = { ...props };
+  const { left, right, lastOperator, operator, appendToLeft } = { ...props };
   return (
     <div id="displayContainer">
-      <div id="display">
-        {appendToLeft || right === "" || right === "0" ? left : right}
-      </div>
+      <div id="display">{appendToLeft ? left : right}</div>
       <div>left : {left}</div>
+      <div>operator: {operator}</div>
       <div>lastOperator: {lastOperator}</div>
       <div>appendToLeft: {appendToLeft.toString()}</div>
       <div>right: {right}</div>
@@ -22,11 +21,14 @@ Presentation.propTypes = {
   left: PropTypes.string,
   right: PropTypes.string,
   lastOperator: PropTypes.string,
+  operator: PropTypes.string,
   appendToLeft: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => {
-  return { ...state };
+  return {
+    ...state,
+  };
 };
 
 const Display = connect(mapStateToProps, null)(Presentation);

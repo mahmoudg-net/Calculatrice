@@ -1,21 +1,26 @@
 export const INPUT = "INPUT";
-export const OPERATOR = "OPERATOR";
+export const APPEND_OPERATOR = "APPEND_OPERATOR";
+export const COMPUTE = "COMPUTE";
 export const CLEAR = "CLEAR";
 
 export const Input = (newChar) => {
   return {
     type: INPUT,
-    payload: {
-      appendToLeft: true, //append to left or to right
-      newChar,
-    },
+    payload: newChar,
   };
 };
 
-export const Operator = (ope) => {
+export const AppendOperator = (operator) => {
   return {
-    type: OPERATOR,
-    payload: ope,
+    type: APPEND_OPERATOR,
+    payload: operator,
+  };
+};
+
+export const Compute = (operator) => {
+  return {
+    type: COMPUTE,
+    payload: operator,
   };
 };
 
@@ -26,9 +31,28 @@ export const Clear = () => {
 };
 
 export const AllOperators = {
-  "+": { func: (a, b) => Number(a) + Number(b), id: "add" },
-  "-": { func: (a, b) => Number(a) - Number(b), id: "subtract" },
-  "*": { func: (a, b) => Number(a) * Number(b), id: "multiply" },
-  "/": { func: (a, b) => Number(a) / Number(b), id: "divide" },
-  "=": { func: (a) => a, id: "equals" },
+  "+": {
+    func: (a, b) => {
+      return Number(a) + Number(b);
+    },
+    id: "add",
+  },
+  "-": {
+    func: (a, b) => {
+      return Number(a) - Number(b);
+    },
+    id: "subtract",
+  },
+  "*": {
+    func: (a, b) => {
+      return Number(a) * Number(b);
+    },
+    id: "multiply",
+  },
+  "/": {
+    func: (a, b) => {
+      return Number(a) / Number(b);
+    },
+    id: "divide",
+  },
 };

@@ -1,20 +1,23 @@
 import React from "react";
-import { Provider, connect } from "react-redux";
-import store from "./redux/store";
+import { connect } from "react-redux";
 import Display from "./components/display";
 import InputButton from "./components/inputButton";
-import { AllOperators, Clear } from "./redux/actions";
+import { AllOperators, Clear, Compute } from "./redux/actions";
 import "./App.css";
-import CalculationButton from "./components/calculatorButton";
+import CalculationButton from "./components/calculationButton";
 
-const ClearButton = connect(null, (dispatch) => {
+const CLEAR_BUTTON = "Clear";
+const RESULT_BUTTON = "=";
+
+const CustomButtom = connect(null, (dispatch) => {
   return {
-    handleClick: () => dispatch(Clear()),
+    handleClick: (buttonType) =>
+      buttonType === CLEAR_BUTTON ? dispatch(Clear()) : dispatch(Compute()),
   };
 })((props) => {
   return (
-    <button id="clear" onClick={props.handleClick}>
-      Clear
+    <button id="custom" onClick={() => props.handleClick(props.buttonType)}>
+      {props.buttonType}
     </button>
   );
 });
@@ -34,28 +37,32 @@ function App() {
     { ".": "decimal" },
   ];
   const operators = Object.keys(AllOperators);
+
   return (
-    <Provider store={store}>
-      <div className="App">
-        <Display />
+    <div className="App">
+      <Display />
+      <div style={{ display: "block" }}>
         {numbers.map((n) => {
           const k = Object.keys(n)[0];
           return <InputButton key={n[k]} char={k} id={n[k]} />;
         })}
-        <div style={{ display: "block" }}>
-          {operators.map((o) => {
-            return (
-              <CalculationButton
-                key={AllOperators[o].id}
-                operator={o}
-                id={AllOperators[o].id}
-              />
-            );
-          })}
-        </div>
-        <ClearButton />
       </div>
-    </Provider>
+      <div style={{ display: "block" }}>
+        {operators.map((o) => {
+          return (
+            <CalculationButton
+              key={AllOperators[o].id}
+              operator={o}
+              id={AllOperators[o].id}
+            />
+          );
+        })}
+      </div>
+      <div style={{ display: "block" }}>
+        <CustomButtom buttonType={RESULT_BUTTON} />
+        <CustomButtom buttonType={CLEAR_BUTTON} />
+      </div>
+    </div>
   );
 }
 

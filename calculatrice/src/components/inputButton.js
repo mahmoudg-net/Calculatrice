@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 import { Input } from "../redux/actions";
 
 function Presentation(props) {
-  const { id, char, handleClick } = { ...props };
+  const { handleClick, id, char } = { ...props };
+  console.log(props);
   return (
     <button id={id} onClick={() => handleClick(char)}>
       {char}
