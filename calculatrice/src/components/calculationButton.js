@@ -7,7 +7,11 @@ function Presentation(props) {
   const { id, operator, right, handleClick } = { ...props };
 
   return (
-    <button id={id} onClick={() => handleClick(operator, right)}>
+    <button
+      id={id}
+      onClick={() => handleClick(operator, right)}
+      className="actionButton"
+    >
       {operator}
     </button>
   );

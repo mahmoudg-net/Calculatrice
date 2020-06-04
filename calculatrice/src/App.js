@@ -25,26 +25,21 @@ function App() {
   return (
     <div className="App">
       <Display />
-      <div style={{ display: "block" }}>
-        {numbers.map((n) => {
-          const k = Object.keys(n)[0];
-          return <InputButton key={n[k]} char={k} id={n[k]} />;
-        })}
-      </div>
-      <div style={{ display: "block" }}>
-        {operators.map((o) => {
-          return (
-            <CalculationButton
-              key={AllOperators[o].id}
-              operator={o}
-              id={AllOperators[o].id}
-            />
-          );
-        })}
-      </div>
-      <div style={{ display: "block" }}>
-        <ActionButtons />
-      </div>
+      {operators.map((o) => {
+        return (
+          <CalculationButton
+            key={AllOperators[o].id}
+            operator={o}
+            id={AllOperators[o].id}
+          />
+        );
+      })}
+      {numbers.map((n) => {
+        const k = Object.keys(n)[0];
+        return <InputButton key={n[k]} char={k} id={n[k]} />;
+      })}
+
+      <ActionButtons />
     </div>
   );
 }

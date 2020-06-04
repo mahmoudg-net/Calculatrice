@@ -35,14 +35,11 @@ const reducer = (state = initialState, action) => {
       return Object.assign(
         {},
         state,
-        { operator: action.payload },
+        { operator: action.payload ?? "" },
         makeComputation(state.left, state.right, state.operator)
       );
     case CLEAR:
       return Object.assign(initialState, { left: "0" });
-    case "INCREMENT":
-      const left = state.left + 1;
-      return { ...state, left };
     default:
       return state;
   }
@@ -95,12 +92,13 @@ const appendOperator = (left, actionOperator, stateOperator, right) => {
 };
 
 const makeComputation = (left, right, stateOperator) => {
-  return {
-    left: AllOperators[stateOperator].func(left, right).toString(),
-    right: "",
-    appendToLeft: false,
-    lastOperator: stateOperator,
-  };
+  if (stateOperator != "") {
+    return {
+      left: AllOperators[stateOperator].func(left, right).toString(),
+      right: "",
+      lastOperator: stateOperator,
+    };
+  }
 };
 
 export default reducer;

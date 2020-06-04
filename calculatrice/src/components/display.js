@@ -6,12 +6,10 @@ function Presentation(props) {
   const { left, right, lastOperator, operator, appendToLeft } = { ...props };
   return (
     <div id="displayContainer">
+      <div id="encours">
+        {left !== "" && operator !== "" ? `${left} ${operator}` : " "}
+      </div>
       <div id="display">{appendToLeft || right === "" ? left : right}</div>
-      <div>left : {left}</div>
-      <div>operator: {operator}</div>
-      <div>lastOperator: {lastOperator}</div>
-      <div>appendToLeft: {appendToLeft.toString()}</div>
-      <div>right: {right}</div>
     </div>
   );
 }

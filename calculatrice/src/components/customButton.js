@@ -25,7 +25,11 @@ const CustomButtom = connect(null, (dispatch, ownProps) => {
 })((props) => {
   const { buttonType, handleClick } = { ...props };
   return (
-    <button id={ButtonsProperties[buttonType].id} onClick={() => handleClick()}>
+    <button
+      className="actionButton"
+      id={ButtonsProperties[buttonType].id}
+      onClick={() => handleClick()}
+    >
       {ButtonsProperties[buttonType].display}
     </button>
   );
@@ -33,9 +37,9 @@ const CustomButtom = connect(null, (dispatch, ownProps) => {
 
 export function ActionButtons() {
   return (
-    <div>
+    <React.Fragment>
       <CustomButtom buttonType={CLEAR_BUTTON} />
       <CustomButtom buttonType={RESULT_BUTTON} />
-    </div>
+    </React.Fragment>
   );
 }
